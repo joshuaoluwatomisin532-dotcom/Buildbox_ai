@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101225">
+<title>Buildbox AI — Your ideas, made clearer</title>
+<style>
+:root{color-scheme:dark;--bg:#0c0e1c;--panel:#15182b;--panel2:#1d2139;--text:#f5f6ff;--muted:#a5aac5;--blue:#6b8cff;--violet:#9a75ff;--line:#2c3150}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#25204b 0,transparent 38%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+.app{max-width:900px;margin:auto;min-height:100vh;display:flex;flex-direction:column;padding:0 16px}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--line);gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:750;font-size:20px;letter-spacing:-.4px}.logo{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--violet));font-size:23px;box-shadow:0 8px 28px #6b8cff30}
+.pill{font-size:12px;color:#c9d4ff;border:1px solid #39446f;background:#202847;padding:5px 10px;border-radius:99px;white-space:nowrap}
+main{flex:1;display:flex;flex-direction:column;padding:34px 0 16px}
+.welcome{text-align:center;margin:auto auto 24px;max-width:620px}.orb{width:76px;height:76px;margin:0 auto 17px;border-radius:26px;display:grid;place-items:center;background:linear-gradient(140deg,#6d8dff,#9d70ff);font-size:38px;box-shadow:0 14px 50px #6d8dff30}
+h1{font-size:clamp(29px,6vw,44px);line-height:1.12;letter-spacing:-1.3px;margin:0 0 12px}.gradient{background:linear-gradient(90deg,#8eafff,#c2a3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{color:var(--muted);margin:0 auto;max-width:470px}
+.suggestions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;max-width:660px;margin:0 auto 20px}
+.suggest{border:1px solid var(--line);border-radius:16px;background:#15182bd9;color:var(--text);padding:14px;text-align:left;cursor:pointer;min-height:78px;transition:.15s}
+.suggest:hover{border-color:#697de0;background:#1b2040}.suggest b{display:block;font-size:14px;margin-bottom:3px}.suggest span{color:var(--muted);font-size:12px}
+#chat{display:none;width:100%;max-width:720px;margin:0 auto 20px;gap:14px;flex-direction:column}
+.message{display:flex;gap:10px;align-items:flex-start}.avatar{flex:0 0 31px;height:31px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--violet));font-size:16px}
+.bubble{max-width:calc(100% - 42px);border:1px solid var(--line);background:var(--panel);padding:12px 14px;border-radius:5px 16px 16px 16px;white-space:pre-wrap;overflow-wrap:anywhere}
+.message.user{justify-content:flex-end}.message.user .bubble{background:#29315a;border-color:#3c4779;border-radius:16px 5px 16px 16px}.message.user .avatar{display:none}
+.composer-wrap{position:sticky;bottom:0;padding:12px 0 14px;background:linear-gradient(transparent,var(--bg) 16%)}
+.composer{max-width:720px;margin:auto;border:1px solid #3a4062;border-radius:20px;background:#171a2e;display:flex;align-items:flex-end;padding:8px;gap:8px;box-shadow:0 12px 35px #0003}
+textarea{flex:1;resize:none;min-height:44px;max-height:140px;border:0;outline:0;background:transparent;color:var(--text);padding:11px 8px;font:inherit}textarea::placeholder{color:#858ba9}
+.send{border:0;width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--violet));color:white;font-size:20px;cursor:pointer}.send:disabled{opacity:.5;cursor:default}
+.tools{max-width:720px;margin:8px auto 0;display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:11px}.textbtn{border:0;background:none;color:#b9c3ff;cursor:pointer;font:inherit;padding:3px}
+footer{text-align:center;color:#747b9e;font-size:11px;padding:8px 0 18px}
+.notice{max-width:720px;margin:0 auto 12px;border:1px solid #5b4b2b;background:#2a2418;color:#e8d7ae;border-radius:12px;padding:10px 12px;font-size:12px}
+@media(min-width:700px){.app{padding:0 28px}.suggestions{grid-template-columns:repeat(4,minmax(0,1fr))}.suggest{min-height:100px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><div class="logo">✦</div><span>Buildbox AI</span></div>
+  <span class="pill">AI assistant · Connected via backend</span>
+</header>
+<main>
+  <section class="welcome" id="welcome">
+    <div class="orb">✦</div>
+    <h1>Your ideas,<br><span class="gradient">made clearer.</span></h1>
+    <p class="subtitle">A little help with learning, writing, planning and building your next big idea.</p>
+  </section>
+  <section class="suggestions" id="suggestions">
+    <button class="suggest" data-prompt="Explain photosynthesis in very simple words, with an example."><b>📚 Explain a topic</b><span>Make learning easier</span></button>
+    <button class="suggest" data-prompt="Help me write a friendly, clear message. Ask me what the message is about."><b>✍️ Help me write</b><span>Messages and ideas</span></button>
+    <button class="suggest" data-prompt="Help me plan a small website project step by step."><b>💡 Build an idea</b><span>Turn a thought into a plan</span></button>
+    <button class="suggest" data-prompt="Teach me the basics of HTML with a small example."><b>💻 Learn coding</b><span>Start with the basics</span></button>
+  </section>
+  <section id="chat" aria-live="polite"></section>
+  <div class="notice" id="demoNotice">Real AI mode · Connect your backend and API key to start chatting.</div>
+</main>
+<div class="composer-wrap">
+  <form class="composer" id="form">
+    <textarea id="prompt" rows="1" placeholder="Ask Buildbox anything…" aria-label="Your message"></textarea>
+    <button class="send" id="send" type="submit" aria-label="Send message">➤</button>
+  </form>
+  <div class="tools"><span>Buildbox AI · Built for your phone</span><button class="textbtn" id="clear" type="button">New chat ↻</button></div>
+</div>
+<footer>Check important information before relying on it. Never enter passwords, bank PINs or private information.</footer>
+</div>
+<script>
+const form=document.getElementById('form'), input=document.getElementById('prompt'), chat=document.getElementById('chat');
+const welcome=document.getElementById('welcome'), suggestions=document.getElementById('suggestions'), notice=document.getElementById('demoNotice'), send=document.getElementById('send');
+const history=[];
+function addMessage(text,who){const row=document.createElement('div');row.className='message '+(who==='user'?'user':'assistant');if(who!=='user'){const a=document.createElement('div');a.className='avatar';a.textContent='✦';row.appendChild(a)}const b=document.createElement('div');b.className='bubble';b.textContent=text;row.appendChild(b);chat.appendChild(row);chat.style.display='flex';welcome.style.display='none';suggestions.style.display='none';row.scrollIntoView({behavior:'smooth',block:'nearest'});return b}
+async function submitMessage(value){const q=(value||'').trim();if(!q||send.disabled)return;addMessage(q,'user');input.value='';input.style.height='auto';send.disabled=true;const b=addMessage('Thinking…','assistant');history.push({role:'user',content:q});try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history.slice(-16)})});const data=await response.json();if(!response.ok)throw new Error(data.error||'The AI request failed.');const answer=data.reply||'Sorry, I could not generate a reply.';b.textContent=answer;history.push({role:'assistant',content:answer});}catch(err){b.textContent='Could not reach the AI service. Check that the website is deployed with the backend and GEMINI_API_KEY configured. Details: '+err.message;history.pop();}finally{send.disabled=false;input.focus()}}
+form.addEventListener('submit',e=>{e.preventDefault();submitMessage(input.value)});
+input.addEventListener('input',()=>{input.style.height='auto';input.style.height=Math.min(input.scrollHeight,140)+'px'});
+input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
+document.querySelectorAll('[data-prompt]').forEach(btn=>btn.addEventListener('click',()=>submitMessage(btn.dataset.prompt)));
+document.getElementById('clear').addEventListener('click',()=>{chat.innerHTML='';chat.style.display='none';welcome.style.display='block';suggestions.style.display='grid';input.value='';history.length=0;input.focus()});
+</script>
+</body>
+</html>
